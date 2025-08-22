@@ -24,11 +24,11 @@ app.use("/api/rooms", roomroutes)
 
 
 mongoose.connect(process.env.MONGODB_URI,)
-.then(() => console.log("✅ DB connected"))
-.catch((err) => console.error("❌ DB connection error:", err));
+.then(() => console.log("DB connected"))
+.catch((err) => console.error("DB connection error:", err));
 
 app.listen(5000, () => {
-  console.log("🚀 Server running on http://localhost:5000");
+  console.log("Server running on http://localhost:5000");
 });
 
 
