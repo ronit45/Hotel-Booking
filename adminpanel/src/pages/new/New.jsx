@@ -3,7 +3,7 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
-import api from "../../utils/axios";
+import axios from "axios";
 
 const CLOUDINARY_URL = process.env.REACT_APP_CLOUDINARY_URL;
 console.log(CLOUDINARY_URL) 
