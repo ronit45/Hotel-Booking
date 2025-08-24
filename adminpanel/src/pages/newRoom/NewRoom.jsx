@@ -5,7 +5,7 @@ import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUpload
 import { useState } from "react";
 import { roomInputs } from "../../formSource";
 import useFetch from "../../hooks/useFetch";
-import axios from "axios";
+import api from "../../utils/axios";
 const NewRoom = () => {
   const [file, setFile] = useState("");
   const [info, setInfo] = useState({})
@@ -21,7 +21,7 @@ const NewRoom = () => {
     e.preventDefault()
     const roomNumbers = rooms.split(",").map(room => ({number : room}))
     try {
-      await axios.post(`/api/rooms/${hotelId}`, {...info, roomNumbers})
+      await api.post(`/rooms/${hotelId}`, {...info, roomNumbers})
       console.log("room created")
     } catch (err) {
       console.log(error)

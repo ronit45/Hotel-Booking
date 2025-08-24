@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../utils/axios";
 import { useEffect, useState, useCallback } from "react";
 
 const useFetch = (url) => {
@@ -10,7 +10,7 @@ const useFetch = (url) => {
   const fetchData = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await axios.get(url);
+      const res = await api.get(url);
       setData(res.data);
     } catch (err) {
       setError(err);

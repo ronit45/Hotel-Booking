@@ -2,7 +2,7 @@ import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom";
 
 import "./login.scss"
-import axios from "axios"
+import api from "../../utils/axios";
 import { AuthContext } from "../../context/AuthContext";
 const Login = () => {
     const[credentials,setCredentials] = useState({
@@ -19,7 +19,7 @@ const Login = () => {
         e.preventDefault() // it prevents referesh page
         dispatch({ type : "LOGIN_START" })
         try {
-            const res = await axios.post("/api/auth/login", credentials)
+            const res = await api.post("/auth/login", credentials)
             console.log(res.data.data.user); 
             if(res.data.data.user.isAdmin){
               dispatch( { type : "LOGIN_SUCCESS", payload: res.data.data.user})

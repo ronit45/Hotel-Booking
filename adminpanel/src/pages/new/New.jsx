@@ -3,7 +3,7 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
-import axios from "axios";
+import api from "../../utils/axios";
 
 const CLOUDINARY_URL = process.env.REACT_APP_CLOUDINARY_URL;
 console.log(CLOUDINARY_URL) 
@@ -34,7 +34,7 @@ const New = ({ inputs, title }) => {
       };
       console.log(newUser)
 
-      await axios.post("/api/auth/register", newUser);
+      await api.post("/auth/register", newUser);
       console.log("User created successfully");
     } catch (error) {
       console.error("Upload error:", error);

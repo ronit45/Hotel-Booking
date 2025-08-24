@@ -4,7 +4,7 @@ import { userColumns, userRows } from "../../datatablesource";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch.js"
-import axios from "axios";
+import api from "../../utils/axios";
 
 const Datatable = ({columns}) => {
   const location =  useLocation();
@@ -35,7 +35,7 @@ const Datatable = ({columns}) => {
         } else if (path === "hotels") {
           deleteUrl = `/api/hotels/${id}`;
         }
-      await axios.delete(deleteUrl ,{withCredentials :true});
+      await api.delete(deleteUrl);
       setList(list.filter((item) => item._id !== id));
       
     } catch (err) {

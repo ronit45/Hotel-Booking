@@ -5,7 +5,7 @@ import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUpload
 import { useState } from "react";
 import { hotelInputs } from "../../formSource";
 import useFetch from "../../hooks/useFetch";
-import axios from "axios";
+import api from "../../utils/axios";
 
 
 const NewHotel = () => {
@@ -46,7 +46,7 @@ const NewHotel = () => {
         photos:list
       }
 
-      await axios.post("/api/hotels", newhotel)
+      await api.post("/hotels", newhotel)
 
       console.log("created")
     } catch (error) {
