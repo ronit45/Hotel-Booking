@@ -1,4 +1,3 @@
-import React from "react";
 import { upload } from "../middlewares/multer.middleware.js";
 import { Router } from "express";
 import { deleteUser, getAllUser, getUser, loginUser, registerUser, updateUser } from "../controllers/user.controller.js";
