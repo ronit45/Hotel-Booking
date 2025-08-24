@@ -1,11 +1,6 @@
 import axios from "axios";
 
-const api = axios.create({
-    baseURL: process.env.REACT_APP_API_URL || "https://hotel-booking-0rkp.onrender.com/api",
-    withCredentials: true,
-    headers: {
-        'Content-Type': 'application/json',
-    },
-});
+axios.defaults.baseURL = "https://hotel-booking-0rkp.onrender.com/api";
+axios.defaults.withCredentials = true;
 
-export default api;
+export default axios;
