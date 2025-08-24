@@ -34,7 +34,7 @@ const New = ({ inputs, title }) => {
       };
       console.log(newUser)
 
-      await api.post("/auth/register", newUser);
+      await axios.post("/auth/register", newUser);
       console.log("User created successfully");
     } catch (error) {
       console.error("Upload error:", error);

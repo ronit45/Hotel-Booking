@@ -46,7 +46,7 @@ const NewHotel = () => {
         photos:list
       }
 
-      await api.post("/hotels", newhotel)
+      await axios.post("/hotels", newhotel)
 
       console.log("created")
     } catch (error) {
