@@ -11,16 +11,35 @@ import roomroutes from "./src/routes/rooms.routes.js"
 dotenv.config();  // Will read from play/.env
 
 const app = express();
-app.use(cors({
-  origin: [
-    "http://localhost:3000",
-    "http://localhost:3001",
-    "https://hotel-booking-psi-tan.vercel.app/",
-    "https://hotel-booking-r9ps.vercel.app/"
-  ],
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
-}));
+
+// CORS configuration - allow specific origins and handle preflight
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://localhost:3001",
+  "https://hotel-booking-psi-tan.vercel.app",
+  "https://hotel-booking-r9ps.vercel.app",
+  "https://hotel-booking-0rkp.onrender.com"
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    // allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('CORS policy: This origin is not allowed'));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
+// enable preflight across-the-board
+app.options('*', cors(corsOptions));
 
 app.use(express.json());
 app.use(cookieParser());
@@ -35,7 +54,7 @@ mongoose.connect(process.env.MONGODB_URI,)
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log("Server running on http://localhost:5000");
+  console.log(`Server running on port ${PORT}`);
 });
 
 
