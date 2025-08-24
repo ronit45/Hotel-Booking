@@ -11,7 +11,13 @@ import roomroutes from "./src/routes/rooms.routes.js"
 dotenv.config();  // Will read from play/.env
 
 const app = express();
-app.use(cors({ origin: "http://localhost:3000",origin:"http://localhost:3001",
+app.use(cors({
+  origin: [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "https://hotel-booking-psi-tan.vercel.app/",
+    "https://hotel-booking-r9ps.vercel.app/"
+  ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
@@ -27,7 +33,8 @@ mongoose.connect(process.env.MONGODB_URI,)
 .then(() => console.log("DB connected"))
 .catch((err) => console.error("DB connection error:", err));
 
-app.listen(5000, () => {
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
   console.log("Server running on http://localhost:5000");
 });
 
