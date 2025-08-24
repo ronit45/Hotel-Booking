@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import "./login.css"
 import { AuthContext } from "../../context/AuthContext"
-import axios from "axios"
+import api from "../../utils/axios"
 const Login = () => {
     const[credentials,setCredentials] = useState({
         username : undefined,
@@ -19,7 +19,7 @@ const Login = () => {
         e.preventDefault() // it prevents referesh page
         dispatch({ type : "LOGIN_START" })
         try {
-            const res = await axios.post("/auth/login", credentials)
+            const res = await api.post("/auth/login", credentials)
             dispatch( { type : "LOGIN_SUCCESS", payload: res.data.data.user})
             navigate("/")
         } catch (error) {
