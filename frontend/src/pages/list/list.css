@@ -11,6 +11,11 @@
   gap: 20px;
 }
 
+@media (max-width:768px){
+  .listWrapper{ flex-direction: column; padding: 0 16px }
+  .listSearch{ position: static; width: 100% }
+}
+
 .listSearch {
   flex: 1;
   background-color: #febb02;

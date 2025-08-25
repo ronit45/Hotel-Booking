@@ -1,0 +1,30 @@
+/* Global responsive utilities */
+:root{
+  --max-width: 1024px;
+}
+
+.container{
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+/* Mobile first adjustments */
+@media (max-width: 768px){
+  .container{ padding: 0 12px }
+  .grid-2{ display:block }
+}
+
+@media (max-width: 480px){
+  .container{ padding: 0 10px }
+}
+
+/* Utility: make images responsive */
+img{ max-width: 100%; height: auto; display: block }
+
+/* Common breakpoint helper */
+@media (max-width: 768px){
+  .hide-on-mobile{ display:none !important }
+}

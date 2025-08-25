@@ -4,6 +4,8 @@
   display: flex;
   justify-content: space-between;
   gap: 20px;
+  box-sizing: border-box;
+  padding: 0 16px;
 }
 
 .pListItem{
@@ -17,6 +19,10 @@
   width: 100%;
   height: 150px;
   object-fit: cover;
+}
+
+@media (max-width:768px){
+  .pList{ flex-direction: column; gap: 12px }
 }
 
 .pListTitles>h1{

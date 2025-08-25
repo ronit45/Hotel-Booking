@@ -134,6 +134,20 @@
   height: 80vh;
 }
 
+@media (max-width:768px){
+  .hotelImgWrapper{ width: 48% }
+  .hotelDetails{ flex-direction: column }
+  .hotelDetailsPrice{ width: 100%; order: 2 }
+  .hotelDetailsTexts{ order: 1 }
+  .bookNow{ position: static; margin-top: 8px }
+  .sliderImg{ width: 95%; height: 60vh }
+}
+
+@media (max-width:420px){
+  .hotelImgWrapper{ width: 100% }
+  .hotelImg{ height: 200px; object-fit: cover }
+}
+
 .close{
   position: absolute;
   top: 20px;

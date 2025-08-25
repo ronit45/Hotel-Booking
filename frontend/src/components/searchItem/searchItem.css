@@ -14,6 +14,12 @@
   object-fit: cover;
 }
 
+@media (max-width:768px){
+  .searchItem{ flex-direction: column; align-items: stretch }
+  .siImg{ width: 100%; height: 180px }
+  .siDetails{ text-align: left }
+}
+
 .siDesc {
   display: flex;
   flex-direction: column;
