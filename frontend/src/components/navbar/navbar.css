@@ -25,3 +25,16 @@
   cursor: pointer;
   color: #003580;
 }
+
+@media (max-width: 768px) {
+  .navContainer{
+    padding: 0 12px;
+  }
+  .logo{ font-size: 16px }
+  .navButton{ padding: 4px 8px; margin-left: 8px }
+}
+
+@media (max-width: 420px) {
+  .navContainer{ flex-direction: column; gap: 6px; height: auto; padding: 8px; }
+  .navButton{ margin-left: 0 }
+}

@@ -7,6 +7,16 @@
 }
 
 .homeTitle{
-  width: 1024px;
+  width: 100%;
+  max-width: 1024px;
   font-size: 20px;
+}
+
+@media (max-width: 768px) {
+  .homeContainer{ margin-top: 30px; gap: 18px }
+  .homeTitle{ font-size: 18px }
+}
+
+@media (max-width: 420px) {
+  .homeTitle{ font-size: 16px }
 }
