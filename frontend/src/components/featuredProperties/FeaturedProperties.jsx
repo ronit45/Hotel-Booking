@@ -8,7 +8,7 @@ const FeaturedProperties = () => {
     <div className="fp">
       {loading ? "loading" : (
         <>
-      {data.map(item => (
+  {Array.isArray(data) && data.map(item => (
 
      <div className="fpItem" key= {item._id}>
         <img
