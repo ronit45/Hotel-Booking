@@ -84,8 +84,10 @@ export const loginUser = asyncHandler(async (req,res) => {
   ("-password, -refreshToken")
 
   const options = {
-    httpsOnly : true,
-    secure : true,
+    httpOnly: true,
+    secure: true,
+    sameSite: 'none',
+    path: '/',
   }
 
   return res
@@ -117,10 +119,12 @@ const logoutUser = asyncHandler(async(req,res) => {
         }
     )
 
-    const options = {
-        httpOnly : true,
-        secure : true
-    }
+  const options = {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'none',
+    path: '/',
+  }
 
     return res
     .status(200)
