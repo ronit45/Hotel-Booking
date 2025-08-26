@@ -8,22 +8,35 @@ body {
   /* The Navbar is fixed, so the content will naturally flow underneath */
 }
 
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8rem 1.5rem 4rem 1.5rem; /* Padding for content inside */
+  text-align: center;
+  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1566073771259-6a_8506099945?q=80&w=2070&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  /* This section is now outside of the constrained homeContainer */
+}
+
 .homeContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 3rem; /* 48px */
-  padding: 8rem 1.5rem 3rem 1.5rem; /* Added top padding to account for fixed Navbar */
+  padding: 3rem 1.5rem;
   max-width: 1280px;
   margin: 0 auto;
-  text-align: center;
 }
 
 .title {
   font-size: 2.25rem;
   font-weight: 700;
-  color: #1f2937;
-  margin-bottom: 0.25rem; /* Reduced this value */
+  margin-bottom: 0.5rem;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
 }
 
 @media (min-width: 768px) {
@@ -34,14 +47,13 @@ body {
 
 .subtitle {
   font-size: 1.125rem;
-  color: #4a5568;
-  margin-bottom: 2rem;
   max-width: 600px;
+  margin-bottom: 2rem;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
 }
 
-/* This targets the search bar from Header.jsx to control its width on this page */
-.homeContainer .search-bar-container {
-  max-width: 900px; /* Reduces the width of the search bar */
+.hero .search-bar-container {
+  max-width: 900px;
   width: 100%;
 }
 
