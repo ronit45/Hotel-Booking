@@ -1,6 +1,6 @@
 import React from 'react';
 import useFetch from "../../hooks/useFetch";
-import "./Featured.css";
+import "./featured.css";
 
 const Featured = () => {
   const { data, loading, error } = useFetch("/hotels/countByCity?cities=madrid,london,berlin");
