@@ -11,6 +11,7 @@ import roomroutes from "./src/routes/rooms.routes.js"
 dotenv.config();  // Will read from play/.env
 
 const app = express();
+console.log("reached1");
 
 // CORS configuration - allow specific origins and handle preflight
 const allowedOrigins = [
@@ -20,7 +21,7 @@ const allowedOrigins = [
   "https://hotel-booking-r9ps.vercel.app",
   "https://hotel-booking-0rkp.onrender.com"
 ];
-
+console.log("reached2");
 const corsOptions = {
   origin: function (origin, callback) {
     // allow requests with no origin (like mobile apps or curl)
@@ -36,15 +37,8 @@ const corsOptions = {
   credentials: true,
   optionsSuccessStatus: 200
 };
-
-app.use(cors(corsOptions));
-// enable preflight across-the-board
-app.options('*', cors(corsOptions));
-
-app.use(express.json());
-app.use(cookieParser());
-
-// Diagnostic: describe imported routers before registering
+// Diagnostic: describe imported routers BEFORE registering CORS and routes
+console.log('Allowed CORS origins:', allowedOrigins);
 function describe(v) {
   try {
     if (v === null) return 'null';
@@ -54,7 +48,70 @@ function describe(v) {
     return String(v);
   }
 }
+console.log('router:', describe(router));
+console.log('hotelroutes:', describe(hotelroutes));
+console.log('roomroutes:', describe(roomroutes));
 
+// Guard cors() and app.options to avoid startup crashes caused by
+// unexpected values being passed to Express route registration.
+let corsMiddleware = null;
+try {
+  corsMiddleware = cors(corsOptions);
+  console.log('corsMiddleware created, type:', typeof corsMiddleware);
+} catch (e) {
+  console.error('cors() threw during initialization:', e && e.stack ? e.stack : e);
+}
+
+if (typeof corsMiddleware === 'function') {
+  try {
+    app.use(corsMiddleware);
+    console.log('app.use(cors) registered');
+  } catch (e) {
+    console.error('app.use(cors) failed:', e && e.stack ? e.stack : e);
+  }
+
+  // enable preflight across-the-board; wrap in try/catch to avoid crash and log details
+  try {
+    app.options('*', corsMiddleware);
+    console.log('app.options(*) registered');
+  } catch (err) {
+    console.error('app.options(*) failed during startup:', err && err.stack ? err.stack : err);
+    // Print types/values for quick inspection
+    try {
+      console.error('Type of router import:', describe(router));
+      console.error('Type of hotelroutes import:', describe(hotelroutes));
+      console.error('Type of roomroutes import:', describe(roomroutes));
+    } catch (e) {
+      console.error('Error while describing imports:', e);
+    }
+    // Fallback: enable a simple OPTIONS handler to allow preflight requests
+    app.use((req, res, next) => {
+      if (req.method === 'OPTIONS') {
+        res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
+        res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+        res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+        res.header('Access-Control-Allow-Credentials', 'true');
+        return res.sendStatus(200);
+      }
+      next();
+    });
+    console.log('Registered fallback OPTIONS handler');
+  }
+} else {
+  console.error('corsMiddleware is not a function; registering fallback CORS handler');
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
+    res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    if (req.method === 'OPTIONS') return res.sendStatus(200);
+    next();
+  });
+  console.log('Fallback CORS handler registered');
+}
+app.use(express.json());
+
+app.use(cookieParser());
 console.log('Allowed CORS origins:', allowedOrigins);
 console.log('router:', describe(router));
 console.log('hotelroutes:', describe(hotelroutes));

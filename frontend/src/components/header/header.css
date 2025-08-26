@@ -11,7 +11,8 @@
 .search-bar-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1rem;
+  gap: 1.5rem;
+  justify-content: space-evenly;
 }
 
 @media (min-width: 768px) { 
@@ -22,7 +23,7 @@
 
 @media (min-width: 1024px) {
   .search-bar-grid {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
@@ -34,6 +35,14 @@
   box-sizing: border-box; 
 }
 
+/* Center placeholder/text inside inputs and wrapper-like inputs */
+.search-input { text-align: center; }
+
+.date-input .date-display { width: 100%; display: flex; align-items: center; justify-content: center; }
+.guest-summary { justify-content: center; }
+
+.search-button { display: flex; align-items: center; justify-content: center; }
+
 .search-button {
   background-color: #3b82f6; 
   color: white;
@@ -43,6 +52,8 @@
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
   grid-column: 1 / -1; 
+  font-size: 20px;
+  font-weight: bold;
 }
 
 @media (min-width: 1024px) { 
@@ -112,4 +123,43 @@
   margin: 0 0.5rem;
   min-width: 20px;
   text-align: center;
+}
+
+/* DateRange popup adjustments to match hotels page styling */
+.header-date-range {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 20;
+  box-shadow: 0 8px 24px rgba(2,6,23,0.08);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Tweak selected range pill */
+.rdrSelectedRange .rdrDayNumber span,
+.rdrSelected .rdrDayNumber span {
+  color: white !important;
+}
+.rdrDay.rdrDayInRange .rdrDayNumber span {
+  color: #0550c9 !important;
+}
+.rdrDaySelected .rdrDayNumber span,
+.rdrDayStart .rdrDayNumber span,
+.rdrDayEnd .rdrDayNumber span {
+  background-color: #3b82f6 !important;
+  color: white !important;
+  border-radius: 999px !important;
+  padding: 6px 10px !important;
+}
+
+/* Reduce default calendar box shadow and set rounded corners inside the wrapper */
+.header-date-range .rdrCalendarWrapper {
+  border-radius: 12px;
+}
+
+/* Make the calendar compact on small screens */
+@media (max-width: 480px) {
+  .header-date-range { left: 50%; transform: translateX(-50%); }
+  .rdrMonth { width: 320px; }
 }

@@ -25,7 +25,6 @@
   background-color: #f0f5ff; /* A light blue accent color */
   padding: 20px;
   border-radius: 10px;
-  position: sticky;
   top: 80px;
   height: max-content;
 }
@@ -120,10 +119,9 @@
 @media (max-width: 600px) {
   .listContainer { padding: 12px; margin-top: 70px; }
   .listWrapper { flex-direction: column; gap: 12px; }
-  /* Keep the search box visible while scrolling on small screens
-    without changing functionality: use sticky so it stays below the
-    fixed navbar and the hotel results naturally flow below it. */
-  .listSearch { position: sticky; top: 70px; padding: 12px; border-radius: 8px; z-index: 6; }
+  /* On small screens avoid sticky to prevent overlap: stack the search
+    panel above results and add spacing so the results are pushed down. */
+  .listSearch { position: relative; top: 0; padding: 12px; border-radius: 8px; z-index: auto; margin-bottom: 12px; }
   .listSearch > button { width: 100%; }
   .lsOptions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .lsOptionInput { width: 100%; }

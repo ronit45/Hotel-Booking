@@ -2,16 +2,22 @@ import React, { useState, useEffect, useRef, useContext } from 'react';
 import './header.css';
 import { useNavigate } from 'react-router-dom';
 import { SearchContext } from '../../context/SearchContext';
+import { DateRange } from 'react-date-range';
+import { format } from 'date-fns';
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
 
 const Header = () => {
   const [destination, setDestination] = useState("");
-  const [dates, setDates] = useState({ startDate: new Date(), endDate: new Date() });
+  const [dates, setDates] = useState([{ startDate: new Date(), endDate: new Date(), key: 'selection' }]);
   const [openOptions, setOpenOptions] = useState(false);
   const [options, setOptions] = useState({ adult: 2, children: 0, room: 1 });
+  const [openDate, setOpenDate] = useState(false);
   const navigate = useNavigate();
   const { dispatch } = useContext(SearchContext);
   
   const dropdownRef = useRef(null);
+  const dateRef = useRef(null);
   const handleOption = (name, operation) => {
     setOptions((prev) => ({
       ...prev,
@@ -22,7 +28,7 @@ const Header = () => {
   const handleSearch = () => {
     // Dispatch search into global context and navigate to list page
     console.log('Performing search with:', { destination, dates, options });
-    const payloadDates = [{ startDate: dates.startDate, endDate: dates.endDate, key: 'selection' }];
+    const payloadDates = dates;
     if (dispatch) {
       dispatch({ type: 'NEW_SEARCH', payload: { city: destination, dates: payloadDates, options } });
     }
@@ -33,6 +39,9 @@ const Header = () => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setOpenOptions(false);
+      }
+      if (dateRef.current && !dateRef.current.contains(event.target)) {
+        setOpenDate(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -51,18 +60,21 @@ const Header = () => {
           value={destination}
           onChange={(e) => setDestination(e.target.value)}
         />
-        <input 
-          type="date" 
-          className="search-input"
-          value={dates.startDate instanceof Date ? dates.startDate.toISOString().split('T')[0] : ''}
-          onChange={(e) => setDates({ ...dates, startDate: new Date(e.target.value) })}
-        />
-        <input 
-          type="date" 
-          className="search-input" 
-          value={dates.endDate instanceof Date ? dates.endDate.toISOString().split('T')[0] : ''}
-          onChange={(e) => setDates({ ...dates, endDate: new Date(e.target.value) })}
-        />
+        <div className="search-input date-input" ref={dateRef}>
+          <div className="date-display" onClick={() => setOpenDate(!openDate)}>
+            <span>{`${format(dates[0].startDate, 'MM/dd/yyyy')} to ${format(dates[0].endDate, 'MM/dd/yyyy')}`}</span>
+          </div>
+          {openDate && (
+            <div className="date-range-wrapper header-date-range">
+              <DateRange
+                onChange={(item) => setDates([item.selection])}
+                minDate={new Date()}
+                ranges={dates}
+                rangeColors={["#3b82f6"]}
+              />
+            </div>
+          )}
+        </div>
         
         <div className="guest-dropdown-container" ref={dropdownRef}>
           <div 

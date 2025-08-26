@@ -75,9 +75,9 @@ const days = dayDiff(endDate, startDate)
   }
 
   return (
-    <div>
+    <div className="outercontainer">
       <Navbar />
-      <Header type="list" />
+  
       { loading ? "loading" : (
       <div className="hotelContainer">
         {open && (

@@ -1,8 +1,13 @@
 .hotelContainer {
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
+  padding-top: 50px;
+}
+.outercontainer{
+  display: flex;
 }
 
 .hotelWrapper {

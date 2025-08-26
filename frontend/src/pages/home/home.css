@@ -53,6 +53,21 @@ body {
 .hero .search-bar-container {
   max-width: 900px;
   width: 100%;
+  align-self: center; /* ensure centering inside the .hero flex container */
+}
+
+/* Stronger centering rules to override unexpected layout overrides */
+.hero {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.hero .search-bar-container {
+  margin: 0 auto !important;
+  max-width: 900px !important;
+  width: 80% !important; /* leave horizontal breathing room */
+  box-sizing: border-box !important;
 }
 
 .homeSection {
