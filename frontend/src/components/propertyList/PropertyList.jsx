@@ -1,6 +1,6 @@
 import React from 'react';
 import useFetch from "../../hooks/useFetch";
-import "./PropertyList.css";
+import "./propertyList.css";
 
 const PropertyList = () => {
   const { data, loading, error } = useFetch("/hotels/countByType");
