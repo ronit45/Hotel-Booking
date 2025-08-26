@@ -43,9 +43,49 @@ app.options('*', cors(corsOptions));
 
 app.use(express.json());
 app.use(cookieParser());
-app.use("/api/auth",router)
-app.use("/api/hotels",hotelroutes)
-app.use("/api/rooms", roomroutes)
+
+// Diagnostic: describe imported routers before registering
+function describe(v) {
+  try {
+    if (v === null) return 'null';
+    if (v === undefined) return 'undefined';
+    return `${typeof v}${v && v.constructor ? ' (' + v.constructor.name + ')' : ''}`;
+  } catch (e) {
+    return String(v);
+  }
+}
+
+console.log('Allowed CORS origins:', allowedOrigins);
+console.log('router:', describe(router));
+console.log('hotelroutes:', describe(hotelroutes));
+console.log('roomroutes:', describe(roomroutes));
+
+try {
+  console.log('Registering /api/auth');
+  app.use('/api/auth', router);
+  console.log('Registered /api/auth');
+} catch (err) {
+  console.error('Error while registering /api/auth:', err);
+  throw err;
+}
+
+try {
+  console.log('Registering /api/hotels');
+  app.use('/api/hotels', hotelroutes);
+  console.log('Registered /api/hotels');
+} catch (err) {
+  console.error('Error while registering /api/hotels:', err);
+  throw err;
+}
+
+try {
+  console.log('Registering /api/rooms');
+  app.use('/api/rooms', roomroutes);
+  console.log('Registered /api/rooms');
+} catch (err) {
+  console.error('Error while registering /api/rooms:', err);
+  throw err;
+}
 
 
 mongoose.connect(process.env.MONGODB_URI,)

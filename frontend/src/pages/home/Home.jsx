@@ -12,8 +12,9 @@ const Home = () => {
   return (
     <div className="homeRoot">
       <Navbar />
-      <Header />
+      
       <main className="homeContainer">
+        <Header />
         <Featured />
         <section className="homeSection">
           <h2 className="homeTitle">Browse by property type</h2>
