@@ -1,55 +1,47 @@
+import React from 'react';
 import useFetch from "../../hooks/useFetch";
-import "./featured.css";
+import "./Featured.css";
 
 const Featured = () => {
-const {data,loading,error} = useFetch("/hotels/countByCity?cities=madrid,london")
+  const { data, loading, error } = useFetch("/hotels/countByCity?cities=madrid,london,berlin");
 
+  const images = [
+    "https://images.unsplash.com/photo-1596623814178-22b4a162339c?q=80&w=1932&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1529655683826-1c21ef2be90c?q=80&w=1932&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?q=80&w=2070&auto=format&fit=crop"
+  ];
 
-console.log(data)
+  const cities = ["Berlin", "Madrid", "London"];
+
   return (
-    
-    <div className="featured">
-      
-      {loading ? ("Loading Please wait") : (<>
-      <div className="featuredItem">
-        <img
-          src="https://cf.bstatic.com/xdata/images/city/max500/957801.webp?k=a969e39bcd40cdcc21786ba92826063e3cb09bf307bcfeac2aa392b838e9b7a5&o="
-          alt=""
-          className="featuredImg"
-        />
-        <div className="featuredTitles">
-          <h1>Berlin</h1>
-          <h2>{data[0]} properties</h2>
+    <section className="featured-section">
+      <div className="featured-container">
+        <h2 className="featured-main-title">Explore Popular Destinations</h2>
+        <div className="featured">
+          {loading ? (
+            <p>Loading please wait...</p>
+          ) : error ? (
+            <p>Could not fetch destinations.</p>
+          ) : (
+            <>
+              {Array.isArray(data) && data.map((count, index) => (
+                <div className="featuredItem" key={index}>
+                  <img
+                    src={images[index]}
+                    alt={`View of ${cities[index]}`}
+                    className="featuredImg"
+                  />
+                  <div className="featuredTitles">
+                    <h1>{cities[index]}</h1>
+                    <h2>{count} properties</h2>
+                  </div>
+                </div>
+              ))}
+            </>
+          )}
         </div>
       </div>
-      
-      <div className="featuredItem">
-        <img
-          src="https://cf.bstatic.com/xdata/images/city/max500/690334.webp?k=b99df435f06a15a1568ddd5f55d239507c0156985577681ab91274f917af6dbb&o="
-          alt=""
-          className="featuredImg"
-        />
-        <div className="featuredTitles">
-          <h1>Madrid</h1>
-          <h2>{data[1]} properties</h2>
-        </div>
-      </div>
-      <div className="featuredItem">
-        <img
-          src="https://cf.bstatic.com/xdata/images/city/max500/689422.webp?k=2595c93e7e067b9ba95f90713f80ba6e5fa88a66e6e55600bd27a5128808fdf2&o="
-          alt=""
-          className="featuredImg"
-        />
-        <div className="featuredTitles">
-          <h1>Austin</h1>
-          <h2>532 properties</h2>
-        </div>
-      </div>
-      
-      </>)}
-      
-    </div>
-    
+    </section>
   );
 };
 
