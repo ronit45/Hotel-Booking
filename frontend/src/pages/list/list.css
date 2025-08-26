@@ -115,3 +115,33 @@
   flex-direction: column;
   gap: 20px;
 }
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .listContainer { padding: 12px; margin-top: 70px; }
+  .listWrapper { flex-direction: column; gap: 12px; }
+  /* Keep the search box visible while scrolling on small screens
+    without changing functionality: use sticky so it stays below the
+    fixed navbar and the hotel results naturally flow below it. */
+  .listSearch { position: sticky; top: 70px; padding: 12px; border-radius: 8px; z-index: 6; }
+  .listSearch > button { width: 100%; }
+  .lsOptions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .lsOptionInput { width: 100%; }
+  .date-range-wrapper { position: static; box-shadow: none; margin-top: 8px; }
+  .listResult { gap: 12px; }
+}
+
+@media (min-width: 601px) and (max-width: 1023px) {
+  .listContainer { padding: 16px; }
+  .listWrapper { flex-direction: row; gap: 16px; }
+  .listSearch { flex: 1 1 320px; position: sticky; top: 80px; }
+  .listResult { flex: 2; }
+  .lsOptions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+}
+
+@media (min-width: 1024px) {
+  /* keep existing two-column desktop layout */
+  .listWrapper { flex-direction: row; }
+  .listSearch { flex: 1; }
+  .listResult { flex: 3; }
+}
