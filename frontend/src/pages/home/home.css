@@ -5,8 +5,7 @@ body {
 }
 
 .homeRoot {
-  /* This ensures that the content starts below the fixed navbar */
-  /* The actual Header component will handle its own background and content */
+  /* The Navbar is fixed, so the content will naturally flow underneath */
 }
 
 .homeContainer {
@@ -14,14 +13,40 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 3rem; /* 48px */
-  padding: 3rem 0;
+  padding: 8rem 1.5rem 3rem 1.5rem; /* Added top padding to account for fixed Navbar */
   max-width: 1280px;
   margin: 0 auto;
+  text-align: center;
+}
+
+.title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 0.25rem; /* Reduced this value */
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 3rem;
+  }
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: #4a5568;
+  margin-bottom: 2rem;
+  max-width: 600px;
+}
+
+/* This targets the search bar from Header.jsx to control its width on this page */
+.homeContainer .search-bar-container {
+  max-width: 900px; /* Reduces the width of the search bar */
+  width: 100%;
 }
 
 .homeSection {
   width: 100%;
-  padding: 0 1.5rem;
   box-sizing: border-box;
 }
 
