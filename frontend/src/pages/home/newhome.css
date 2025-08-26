@@ -1,46 +1,22 @@
-/* NewHome modern styles - minimal, airy, responsive */
-:root{
-  --bg:#f7fafc;
-  --card:#ffffff;
-  --muted:#6b7280;
-  --accent:#0a84ff;
-  --glass: rgba(255,255,255,0.7);
+/* --- Global Home Page Styling --- */
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #f7fafc; /* bg-gray-100 */
 }
 
-.nh-root{ background:var(--bg); color:#0f1724; min-height:100vh }
-.nh-main{ max-width:1200px; margin:0 auto; padding:28px 20px }
-
-.nh-hero{ padding:28px 0 }
-.nh-heroInner{ display:flex; gap:28px; align-items:center }
-.nh-heroLeft{ flex:1; max-width:620px }
-.nh-heroRight{ flex:1; display:flex; justify-content:flex-end }
-
-.nh-title{ font-size:44px; margin:0 0 12px 0; line-height:1.02; font-weight:700 }
-.nh-sub{ color:var(--muted); margin:0 0 22px 0; font-size:16px }
-
-.nh-searchPill{ display:flex; gap:10px; align-items:center; background:var(--card); padding:10px; border-radius:999px; box-shadow:0 10px 30px rgba(12,15,20,0.06); }
-.nh-input{ border:0; outline:0; padding:10px 14px; font-size:15px; background:transparent; flex:1 }
-.nh-cta{ background:var(--accent); color:#fff; border:0; padding:10px 18px; border-radius:999px; cursor:pointer; font-weight:600 }
-
-.nh-features{ display:flex; gap:12px; margin-top:18px }
-.nh-feature{ background:var(--card); padding:8px 12px; border-radius:10px; color:var(--muted); box-shadow:0 6px 18px rgba(12,15,20,0.04); font-size:13px }
-
-.nh-visual{ width:420px; height:320px; border-radius:18px; background:linear-gradient(135deg,#e6f0ff 0%, #ffffff 100%); box-shadow: 0 30px 80px rgba(10,20,40,0.08); transform:translateY(-8px) rotate(-2deg) }
-
-.nh-section{ margin-top:36px }
-.nh-section.alt{ background:linear-gradient(180deg, rgba(10,132,255,0.02), transparent); padding:20px; border-radius:14px }
-.nh-sectionTitle{ font-size:20px; margin:0 0 16px 0 }
-.nh-sectionInner{ display:block }
-
-@media (max-width:900px){
-  .nh-heroInner{ flex-direction:column-reverse; align-items:stretch }
-  .nh-heroRight{ justify-content:center }
-  .nh-visual{ width:100%; height:240px }
-  .nh-title{ font-size:28px }
+/* --- Main Content Container --- */
+.homeContainer {
+  margin-top: 50px; /* Adjust based on Navbar height if needed */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px; /* Provides spacing between sections */
+  padding-bottom: 50px;
 }
 
-@media (max-width:480px){
-  .nh-main{ padding:18px 14px }
-  .nh-searchPill{ flex-direction:column; align-items:stretch }
-  .nh-cta{ width:100% }
-}
+/* Note: Most of the styling for the individual components 
+  (Featured, PropertyList, etc.) is handled in their own 
+  respective CSS files. This file is primarily for the 
+  overall layout and spacing of the home page.
+*/

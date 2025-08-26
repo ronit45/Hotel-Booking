@@ -1,36 +1,73 @@
-.pList{
-  width: 100%;
-  max-width: 1024px;
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  box-sizing: border-box;
-  padding: 0 16px;
+.pList-section {
+  padding: 4rem 0;
+  font-family: 'Inter', sans-serif;
 }
 
-.pListItem{
-  flex:1;
-  border-radius: 10px;
+.pList-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.pList-main-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.pList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .pList {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .pList {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.pListItem {
+  border-radius: 0.5rem;
   overflow: hidden;
   cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease-in-out;
 }
 
-.pListImg{
+.pListItem:hover {
+  transform: translateY(-5px);
+}
+
+.pListImg {
   width: 100%;
-  height: 150px;
+  height: 10rem; /* 160px */
   object-fit: cover;
 }
 
-@media (max-width:768px){
-  .pList{ flex-direction: column; gap: 12px }
+.pListTitles {
+  padding: 1rem;
+  background-color: white;
 }
 
-.pListTitles>h1{
-  font-size: 18px;
-  color: #444;
+.pListTitles h1 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+  text-transform: capitalize;
 }
 
-.pListTitles>h2{
-  font-size: 14px;
-  font-weight: 300;
+.pListTitles h2 {
+  font-size: 0.875rem;
+  color: #4a5568;
+  margin: 0.25rem 0 0 0;
 }
