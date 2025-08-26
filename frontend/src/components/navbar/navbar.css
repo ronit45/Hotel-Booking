@@ -1,40 +1,106 @@
-.navbar{
-  height: 50px;
-  background-color: #003580;
-  display: flex;
-  justify-content: center;
+/* --- General Navbar Styling --- */
+.navbar {
+  background-color: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 50;
+  font-family: 'Inter', sans-serif;
 }
 
-.navContainer{
-  width: 100%;
-  max-width: 1024px;
-  color: white;
+.navContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem;
+}
+
+/* --- Logo Styling --- */
+.logo-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.logo {
+  font-size: 1.5rem; /* Equivalent to text-2xl */
+  font-weight: 700; /* Equivalent to font-bold */
+  color: #2d3748; /* Equivalent to text-gray-800 */
+}
+
+.logo-accent {
+  color: #3b82f6; /* Equivalent to text-blue-500 */
+}
+
+/* --- Navigation Links Styling --- */
+.navLinks {
+  display: none; /* Hidden on mobile */
+}
+
+@media (min-width: 768px) { /* md breakpoint */
+  .navLinks {
+    display: flex;
+    gap: 1.5rem; /* Equivalent to space-x-6 */
+    align-items: center;
+  }
+}
+
+.navLink {
+  color: #4a5568; /* Equivalent to text-gray-600 */
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.navLink:hover {
+  color: #3b82f6; /* Equivalent to hover:text-blue-500 */
+}
+
+/* --- User Items (Buttons & Username) Styling --- */
+.navItems {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 1rem; /* Equivalent to space-x-4 */
 }
 
-.logo{
-  font-weight: 500;
+.username {
+  font-weight: 600; /* Equivalent to font-semibold */
+  color: #374151; /* Equivalent to text-gray-700 */
 }
 
-.navButton{
-  margin-left: 20px;
+.navButton {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem; /* Equivalent to rounded-lg */
   border: none;
-  padding: 5px 10px;
+  font-weight: 500;
   cursor: pointer;
-  color: #003580;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
-@media (max-width: 768px) {
-  .navContainer{
-    padding: 0 12px;
-  }
-  .logo{ font-size: 16px }
-  .navButton{ padding: 4px 8px; margin-left: 8px }
+.registerButton {
+  color: #4a5568; /* Equivalent to text-gray-600 */
+  background-color: transparent;
 }
 
-@media (max-width: 420px) {
-  .navContainer{ flex-direction: column; gap: 6px; height: auto; padding: 8px; }
-  .navButton{ margin-left: 0 }
+.registerButton:hover {
+  color: #3b82f6;
+}
+
+.signInButton {
+  background-color: #3b82f6; /* Equivalent to bg-blue-500 */
+  color: white;
+}
+
+.signInButton:hover {
+  background-color: #2563eb; /* Equivalent to hover:bg-blue-600 */
+}
+
+.logoutButton {
+  background-color: #ef4444; /* Equivalent to bg-red-500 */
+  color: white;
+}
+
+.logoutButton:hover {
+  background-color: #dc2626; /* Equivalent to hover:bg-red-600 */
 }
