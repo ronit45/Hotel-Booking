@@ -1,22 +1,35 @@
-.homeContainer{
-  margin-top: 50px;
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #f7fafc;
+}
+
+.homeRoot {
+  /* This ensures that the content starts below the fixed navbar */
+  /* The actual Header component will handle its own background and content */
+}
+
+.homeContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
+  gap: 3rem; /* 48px */
+  padding: 3rem 0;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
-.homeTitle{
+.homeSection {
   width: 100%;
-  max-width: 1024px;
-  font-size: 20px;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
 }
 
-@media (max-width: 768px) {
-  .homeContainer{ margin-top: 30px; gap: 18px }
-  .homeTitle{ font-size: 18px }
-}
-
-@media (max-width: 420px) {
-  .homeTitle{ font-size: 16px }
+.homeTitle {
+  font-size: 1.875rem; /* 30px */
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 2rem;
+  text-align: center;
+  width: 100%;
 }
