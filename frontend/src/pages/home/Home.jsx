@@ -6,7 +6,7 @@ import PropertyList from "../../components/propertyList/PropertyList";
 import FeaturedProperties from "../../components/featuredProperties/FeaturedProperties";
 import MailList from "../../components/mailList/MailList";
 import Footer from "../../components/footer/Footer";
-import "./Home.css";
+import "./home.css";
 
 const Home = () => {
   return (
