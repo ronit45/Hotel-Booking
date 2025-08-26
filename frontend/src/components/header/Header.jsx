@@ -1,11 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import './header.css';
+import { useNavigate } from 'react-router-dom';
+import { SearchContext } from '../../context/SearchContext';
 
 const Header = () => {
   const [destination, setDestination] = useState("");
-  const [dates, setDates] = useState({ startDate: "", endDate: "" });
+  const [dates, setDates] = useState({ startDate: new Date(), endDate: new Date() });
   const [openOptions, setOpenOptions] = useState(false);
   const [options, setOptions] = useState({ adult: 2, children: 0, room: 1 });
+  const navigate = useNavigate();
+  const { dispatch } = useContext(SearchContext);
   
   const dropdownRef = useRef(null);
   const handleOption = (name, operation) => {
@@ -16,8 +20,13 @@ const Header = () => {
   };
 
   const handleSearch = () => {
-        console.log("Performing search with:", { destination, dates, options });
-    alert(`Searching for hotels in ${destination || "any location"}.`);
+    // Dispatch search into global context and navigate to list page
+    console.log('Performing search with:', { destination, dates, options });
+    const payloadDates = [{ startDate: dates.startDate, endDate: dates.endDate, key: 'selection' }];
+    if (dispatch) {
+      dispatch({ type: 'NEW_SEARCH', payload: { city: destination, dates: payloadDates, options } });
+    }
+    navigate('/hotels', { state: { destination, dates: payloadDates, options } });
   };
 
   useEffect(() => {
@@ -45,14 +54,14 @@ const Header = () => {
         <input 
           type="date" 
           className="search-input"
-          value={dates.startDate}
-          onChange={(e) => setDates({ ...dates, startDate: e.target.value })}
+          value={dates.startDate instanceof Date ? dates.startDate.toISOString().split('T')[0] : ''}
+          onChange={(e) => setDates({ ...dates, startDate: new Date(e.target.value) })}
         />
         <input 
           type="date" 
           className="search-input" 
-          value={dates.endDate}
-          onChange={(e) => setDates({ ...dates, endDate: e.target.value })}
+          value={dates.endDate instanceof Date ? dates.endDate.toISOString().split('T')[0] : ''}
+          onChange={(e) => setDates({ ...dates, endDate: new Date(e.target.value) })}
         />
         
         <div className="guest-dropdown-container" ref={dropdownRef}>

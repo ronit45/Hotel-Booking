@@ -1,88 +1,117 @@
 .listContainer {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 80px; /* Space for the fixed navbar */
+  padding: 20px;
+  font-family: 'Inter', sans-serif;
 }
 
 .listWrapper {
   width: 100%;
-  max-width: 1024px;
+  max-width: 1280px;
   display: flex;
+  flex-direction: column;
   gap: 20px;
 }
 
-@media (max-width:768px){
-  .listWrapper{ flex-direction: column; padding: 0 16px }
-  .listSearch{ position: static; width: 100% }
+@media (min-width: 1024px) {
+  .listWrapper {
+    flex-direction: row;
+  }
 }
 
 .listSearch {
   flex: 1;
-  background-color: #febb02;
-  padding: 10px;
+  background-color: #f0f5ff; /* A light blue accent color */
+  padding: 20px;
   border-radius: 10px;
   position: sticky;
-  top: 10px;
+  top: 80px;
   height: max-content;
 }
 
-.lsTitle{
-  font-size: 20px;
-  color: #555;
-  margin-bottom: 10px;
+.lsTitle {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
 }
 
-.lsItem{
+.lsItem {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  position: relative; /* This will contain the absolutely positioned calendar */
 }
 
-.lsItem>label{
-  font-size: 12px;
+.lsItem > label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4a5568;
 }
 
-.lsItem>input{
-  height: 30px;
-  border: none;
-  padding: 5px;
-}
-.lsItem>span{
-  height: 30px;
-  padding: 5px;
+.lsItem > input, .lsItem > span {
+  height: 40px;
+  padding: 0 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 5px;
   background-color: white;
   display: flex;
   align-items: center;
+}
+
+.lsItem > span {
   cursor: pointer;
 }
 
-.lsOptions{
+.date-range-wrapper {
+  position: absolute;
+  top: 70px; /* Position it below the input/span */
+  left: 0;
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.lsOptions {
   padding: 10px;
 }
 
-.lsOptionItem{
+.lsOptionItem {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
-  color: #555;
-  font-size: 12px;
+  color: #4a5568;
+  font-size: 0.875rem;
 }
 
-.lsOptionInput{
-  width: 50px;
+.lsOptionInput {
+  width: 70px;
+  border: 1px solid #d1d5db;
+  border-radius: 5px;
+  padding: 5px;
 }
 
-.listSearch>button{
-  padding: 10px;
-  background-color: #0071c2;
+.listSearch > button {
+  padding: 12px;
+  background-color: #3b82f6;
   color: white;
   border: none;
   width: 100%;
   font-weight: 500;
   cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.listSearch > button:hover {
+  background-color: #2563eb;
 }
 
 .listResult {
   flex: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
