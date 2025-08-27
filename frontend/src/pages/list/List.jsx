@@ -31,8 +31,9 @@ const List = () => {
   const dateRef = useRef(null);
 
   const { data, loading, error, reFetch } = useFetch(
-    `/hotels?city=${destination}&min=${min || 0}&max=${max || 999}`
+    `/hotels?city=${destination.toLowerCase()}&min=${min || 0}&max=${max || 999}`
   );
+  
 
   const handleClick = () => {
     reFetch();

@@ -70,7 +70,7 @@ const Datatable = ({columns}) => {
     <div className="datatable">
       <div className="datatableTitle">
         Add New {path}
-        <Link to={`/${path}/new`} className="link">
+        <Link to="users/test" className="link">
           Add New
         </Link>
       </div>

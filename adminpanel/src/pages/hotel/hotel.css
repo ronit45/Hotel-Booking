@@ -1,0 +1,13 @@
+.admin-hotel { padding: 24px; font-family: Inter, sans-serif; }
+.admin-hotel-title { margin-bottom: 16px; }
+.hotel-details { display: flex; gap: 20px; align-items: flex-start; margin-bottom: 24px; }
+.hotel-main { flex: 1; }
+.hotel-main-image { width: 360px; flex: 0 0 360px; }
+.hotel-main-photo { width: 100%; height: 220px; object-fit: cover; border-radius: 8px; border: 1px solid #e6e6e6; }
+.hotel-photos { display: flex; gap: 8px; flex-wrap: wrap; max-width: 320px; }
+.hotel-photo { width: 100px; height: 80px; object-fit: cover; border-radius: 6px; }
+.hotel-meta, .hotel-price { color: #555; margin-top: 8px; }
+.rooms-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.room-card { border: 1px solid #e5e7eb; padding: 12px; border-radius: 8px; background: #fff; }
+.rooms-title { margin-top: 24px; margin-bottom: 8px; }
+

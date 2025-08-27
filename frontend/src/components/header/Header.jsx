@@ -16,6 +16,7 @@ const Header = () => {
   const navigate = useNavigate();
   const { dispatch } = useContext(SearchContext);
   
+
   const dropdownRef = useRef(null);
   const dateRef = useRef(null);
   const handleOption = (name, operation) => {
@@ -58,7 +59,7 @@ const Header = () => {
           placeholder="e.g. Mumbai" 
           className="search-input"
           value={destination}
-          onChange={(e) => setDestination(e.target.value)}
+          onChange={(e) => setDestination(e.target.value.toLowerCase())}
         />
         <div className="search-input date-input" ref={dateRef}>
           <div className="date-display" onClick={() => setOpenDate(!openDate)}>
