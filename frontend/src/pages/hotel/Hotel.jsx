@@ -14,7 +14,7 @@ import { useContext, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import { useLocation, useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
-import { AuthContext } from "../../context/AuthContext.js";
+import { useAuthStore } from "../../store/auth";
 import Reserve from "../../components/reserve/Reserve";
 
 const Hotel = () => {
@@ -29,7 +29,7 @@ const Hotel = () => {
 
   const {dates, options} = useContext(SearchContext)
   
-  const {user} = useContext(AuthContext)
+  const { user } = useAuthStore();
   const navigate = useNavigate()
 
 // Add a fallback for dates array
