@@ -33,24 +33,36 @@ const Login = () => {
 
   return (
     <div className="login">
-      <input
-        type="text"
-        placeholder="username"
-        id="username"
-        onChange={handleChange}
-        className="lInput"
-      />
-      <input
-        type="password"
-        placeholder="password"
-        id="password"
-        onChange={handleChange}
-        className="lInput"
-      />
-      <button disabled={loading} onClick={handleClick} className="lButton">
-        Login
-      </button>
-      {error && <span>{error.message}</span>}
+      <form className="lContainer" onSubmit={handleClick}>
+        <h2 className="lTitle">Welcome Back</h2>
+        <p className="lSubtitle">Sign in to continue to <strong>StayFinder</strong></p>
+        <div className="lFieldGroup">
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            placeholder="Enter your username"
+            id="username"
+            onChange={handleChange}
+            autoComplete="username"
+          />
+        </div>
+        <div className="lFieldGroup">
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            placeholder="Enter your password"
+            id="password"
+            onChange={handleChange}
+            autoComplete="current-password"
+          />
+        </div>
+        <button disabled={loading} type="submit" className="lButton">
+          {loading ? 'Signing in...' : 'Login'}
+        </button>
+        {error && <div className="lError">{error.message || error}</div>}
+        <div className="lDivider"><span>OR</span></div>
+        <div className="lAltAction">Don't have an account? <a href="/register">Create one</a></div>
+      </form>
     </div>
   );
 };

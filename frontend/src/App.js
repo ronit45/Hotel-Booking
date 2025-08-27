@@ -9,20 +9,22 @@ import Hotel from "./pages/hotel/Hotel";
 import List from "./pages/list/List";
 import { SearchContextProvider } from "./context/SearchContext";
 import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
 
 
 function App() {
   return (
     <SearchContextProvider>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home/>}/>
-  <Route path="/hotels" element={<List/>}/>
-  <Route path="/new-home" element={<NewHome/>}/>
-        <Route path="/hotels/:id" element={<Hotel/>}/>
-        <Route path="/login" element={<Login />}></Route>
-      </Routes>
-    </BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/hotels" element={<List />} />
+          <Route path="/new-home" element={<NewHome />} />
+          <Route path="/hotels/:id" element={<Hotel />} />
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/register" element={<Register />}></Route>
+        </Routes>
+      </BrowserRouter>
     </SearchContextProvider>
   );
 }

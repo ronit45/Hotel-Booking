@@ -32,7 +32,7 @@ const Navbar = () => {
           ) : (
             // If no user is logged in, show Register and Sign In buttons
             <>
-              <button className="navButton registerButton">Register</button>
+              <Link to="/register" className="navButton registerButton">Register</Link>
               <Link to="/login" className="navButton signInButton" >Sign In</Link>
             </>
           )}
