@@ -28,16 +28,13 @@ const Hotel = () => {
   const {data,loading,error} = useFetch(`/hotels/find/${id}`)
 
   const {dates, options} = useContext(SearchContext)
-
+  
   const {user} = useContext(AuthContext)
   const navigate = useNavigate()
 
-  
 // Add a fallback for dates array
 const startDate = dates?.[0]?.startDate ? new Date(dates[0].startDate) : new Date();
-console.log(startDate)
 const endDate = dates?.[0]?.endDate ? new Date(dates[0].endDate) : new Date();
-
 const milliseconds_per_day = 1000*60*60*24
 function dayDiff(date1, date2) {
   const timeDiff = Math.abs(date2.getTime() - date1.getTime())
@@ -147,7 +144,6 @@ const days = dayDiff(endDate, startDate)
             </div>
           </div>
         </div>
-        <MailList />
         <Footer />
       </div>
       )}

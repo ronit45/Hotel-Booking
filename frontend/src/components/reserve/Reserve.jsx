@@ -8,8 +8,10 @@ import axios from "axios"
 import { useNavigate } from "react-router-dom"
 
 const Reserve = ({setOpen, hotelId}) => {
+    // add API base from env
+    const API = process.env.REACT_APP_API_URL || ""
 
-    const {data, loading,error} = useFetch(`room/${hotelId}`)
+    const {data, loading,error} = useFetch(`/hotels/room/${hotelId}`)
     const [selectedRooms,setSelectedRooms] = useState([])
     const {dates} = useContext(SearchContext)
 
@@ -31,7 +33,6 @@ const Reserve = ({setOpen, hotelId}) => {
 
 
     const allDates =  getDatesInRange(dates[0].startDate,dates[0].endDate)
-    console.log(allDates)
     
     const isAvailable = (roomNumber) => {
         const isFound = roomNumber.unavailableDates.some(date => 
@@ -51,22 +52,17 @@ const Reserve = ({setOpen, hotelId}) => {
     const handleClick = async () => {
         try{
             await Promise.all(
-                
-                selectedRooms.map((roomId)  => {
-                const res = axios.put(`/rooms/availability/${roomId}`,
-                     {dates : allDates})
-                return res.data  
-                }
-            ))
-        setOpen(false)
-        navigate("/")
-        }
-        catch(error){
-
+                selectedRooms.map((roomId) => 
+                    axios.put(`${API}/rooms/availability/${roomId}`, { dates: allDates }, { withCredentials: true })
+                )
+            )
+            setOpen(false)
+            navigate("/")
+        } catch (error) {
+            console.error("Reserve: update availability failed", error.response || error)
         }
     }
-
-    console.log(selectedRooms)
+    console.log(data)
     return (
         <div className="reserve">
             <div className="rContainer">
@@ -76,7 +72,7 @@ const Reserve = ({setOpen, hotelId}) => {
                     onClick={() => setOpen(false)}
                 />
                 <span>Select your Rooms :</span>
-                {data.map(item => (
+                {data && data.map(item => (
                     <div className="rItem" key= {item._id}>
                         <div className="rItemInfo">
                             <div className="rTitle">{item.title}</div>

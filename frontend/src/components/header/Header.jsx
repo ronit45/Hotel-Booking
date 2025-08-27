@@ -27,8 +27,6 @@ const Header = () => {
   };
 
   const handleSearch = () => {
-    // Dispatch search into global context and navigate to list page
-    console.log('Performing search with:', { destination, dates, options });
     const payloadDates = dates;
     if (dispatch) {
       dispatch({ type: 'NEW_SEARCH', payload: { city: destination, dates: payloadDates, options } });

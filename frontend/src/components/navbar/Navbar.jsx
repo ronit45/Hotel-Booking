@@ -17,13 +17,7 @@ const Navbar = () => {
           </span>
         </a>
         
-        {/* Navigation links */}
-        <div className="navLinks">
-          <a href="/hotels" className="navLink">Hotels</a>
-          <a href="/flights" className="navLink">Flights</a>
-          <a href="/rentals" className="navLink">Car Rentals</a>
-          <a href="/support" className="navLink">Support</a>
-        </div>
+        
 
         {/* User authentication section */}
         <div className="navItems">

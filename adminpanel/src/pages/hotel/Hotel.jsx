@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react';
 import api from '../../utils/axios';
-import axios from 'axios'; // plain axios for Cloudinary uploads
+import axios from 'axios';
 import './hotel.css';
 import { useParams } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-// removed useFetch import (hooks must be called at top-level)
 
 const Hotel = () => {
   const {hotelId : id } = useParams();
@@ -37,7 +36,6 @@ const Hotel = () => {
         const res = await api.get(`/api/hotels/room/${id}`);
         setRooms(res.data || []);
       } catch (err) {
-        // rooms might be empty or 404; don't break the page
         setRooms([]);
       }
     };
@@ -45,7 +43,6 @@ const Hotel = () => {
     Promise.all([fetchHotel(), fetchRooms()]).finally(() => setLoading(false));
   }, [id]);
 
-  // initialize form when hotel loads
   useEffect(() => {
     if (hotel) {
       setForm({
@@ -75,7 +72,6 @@ const Hotel = () => {
       const payload = { ...form };
 
       if (payload.cheapestPrice !== '') payload.cheapestPrice = Number(payload.cheapestPrice);
-      // if files selected, upload them to Cloudinary first (uses unsigned upload similar to NewHotel)
       if (files && files.length > 0) {
         try {
           const list = await Promise.all(
@@ -87,16 +83,13 @@ const Hotel = () => {
               return uploadRes.data.secure_url || uploadRes.data.url || null;
             })
           );
-          // filter out any null results
           payload.photos = list.filter(Boolean);
           console.log(payload)
         } catch (upErr) {
           console.error('Cloudinary upload failed', upErr.response?.data || upErr.message || upErr);
-          // fall back to existing photos if upload fails
         }
       }
 
-      // Ensure Authorization header is set as a fallback using stored user token
       if (user && user.accessToken) {
         api.defaults.headers.common['Authorization'] = `Bearer ${user.accessToken}`;
       }
@@ -104,7 +97,6 @@ const Hotel = () => {
   console.log('PUT payload:', payload);
   const res = await api.put(`/api/hotels/find/${id}`, payload);
   console.log('PUT response:', res.data);
-  // if backend returned updated hotel, use it; otherwise preserve
   if (res?.data) setHotel(res.data);
       setIsEditing(false);
     } catch (err) {
@@ -122,7 +114,7 @@ const Hotel = () => {
       {hotel ? (
         <div className="hotel-details">
           <div className="hotel-main-image">
-            {/* show preview when editing and a file is selected, otherwise first hotel photo or placeholder */}
+            
             <img
               src={
                 isEditing && files && files.length > 0

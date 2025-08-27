@@ -1,43 +1,50 @@
-import { useReducer ,createContext} from "react"
+import { createContext, useReducer } from "react";
 
-const INITIAl_STATE = {
-    city : undefined,
-    dates : [
-        {
+const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+
+const INITIAL_STATE = {
+  city: "",
+  dates: [
+    {
       startDate: new Date(),
-      endDate: new Date(),
+      endDate: new Date(Date.now() + ONE_DAY_MS),
       key: "selection",
     },
-    ],
-    options : {
-        adult : undefined,
-        children : undefined,
-        room : undefined,
-    },
+  ],
+  options: {
+    adult: 1,
+    children: 0,
+    room: 1,
+  },
+};
+
+export const SearchContext = createContext(INITIAL_STATE);
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "NEW_SEARCH":
+      // payload: { city, dates, options }
+      return { ...state, ...action.payload };
+    case "SET_CITY":
+      return { ...state, city: action.payload };
+    case "UPDATE_DATES":
+      return { ...state, dates: action.payload };
+    case "UPDATE_OPTIONS":
+      return { ...state, options: { ...state.options, ...action.payload } };
+    case "RESET":
+      return INITIAL_STATE;
+    default:
+      return state;
+  }
 }
 
-export const SearchContext = createContext(INITIAl_STATE)
+export const SearchContextProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
 
-const SearchReducer = (state,action) => {
-    switch(action.type){
-        case "NEW_SEARCH" :
-            return action.payload
-        case "RESET_SEARCH" :
-            return INITIAl_STATE
-        default :
-            return state;
-
-    }
-}
-
-export const SearchContextProvider = ({children}) => {
-    const [state, dispatch] = useReducer(SearchReducer, INITIAl_STATE);
-
-    return(
-    <SearchContext.Provider
-        value={{city: state.city, dates : state.dates, options : state.options, dispatch}}>
-        {children}
+  return (
+    <SearchContext.Provider value={{ ...state, dispatch }}>
+      {children}
     </SearchContext.Provider>
-)
-}
+  );
+};
 

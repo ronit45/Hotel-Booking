@@ -13,7 +13,7 @@ import useFetch from "../../hooks/useFetch";
 
 const List = () => {
   const location = useLocation();
-  const { city: ctxCity, dates: ctxDates, options: ctxOptions } = useContext(SearchContext);
+  const { city: ctxCity, dates: ctxDates, options: ctxOptions, dispatch } = useContext(SearchContext);
 
   // Safely initialize from location.state (when navigated from Header) or fall back to SearchContext
   const initialDestination = location?.state?.destination ?? ctxCity ?? "";
@@ -29,7 +29,7 @@ const List = () => {
   const [min, setMin] = useState(undefined);
   const [max, setMax] = useState(undefined);
   const dateRef = useRef(null);
-
+  console.log(dates)
   const { data, loading, error, reFetch } = useFetch(
     `/hotels?city=${destination.toLowerCase()}&min=${min || 0}&max=${max || 999}`
   );
@@ -74,7 +74,12 @@ const List = () => {
               {openDate && (
                 <div className="date-range-wrapper">
                   <DateRange
-                    onChange={(item) => setDates([item.selection])}
+                    onChange={(item) => {
+                      const newDates = [item.selection];
+                      setDates(newDates);
+                      // update SearchContext so other pages/components see the change
+                      if (dispatch) dispatch({ type: "UPDATE_DATES", payload: newDates });
+                    }}
                     minDate={new Date()}
                     ranges={dates}
                   />
