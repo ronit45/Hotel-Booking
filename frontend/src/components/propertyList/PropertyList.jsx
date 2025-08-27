@@ -4,13 +4,12 @@ import "./propertyList.css";
 
 const PropertyList = () => {
   const { data, loading, error } = useFetch("/hotels/countByType");
-
+  console.log(data)
   const images = [
     "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2070&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?q=80&w=2070&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?q=80&w=1949&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1613553423758-d8b7a72a0425?q=80&w=1974&auto=format&fit=crop"
   ];
 
   return (

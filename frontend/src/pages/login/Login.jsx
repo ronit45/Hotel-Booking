@@ -23,8 +23,8 @@ const Login = () => {
     loginStart();
     try {
       const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, credentials);
-  console.log("LOGIN RESPONSE", res.data);
-  loginSuccess(res.data.user || res.data.details || res.data.data?.user || res.data);
+        console.log("LOGIN RESPONSE", res.data);
+        loginSuccess(res.data.user || res.data.details || res.data.data?.user || res.data);
       navigate("/");
     } catch (err) {
       loginFailure(err.response?.data || err.message);
