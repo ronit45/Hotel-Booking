@@ -15,10 +15,12 @@ const Header = () => {
   const [openDate, setOpenDate] = useState(false);
   const navigate = useNavigate();
   const { dispatch } = useContext(SearchContext);
-  
+
 
   const dropdownRef = useRef(null);
   const dateRef = useRef(null);
+
+  
   const handleOption = (name, operation) => {
     setOptions((prev) => ({
       ...prev,
@@ -50,11 +52,11 @@ const Header = () => {
   }, [dropdownRef]);
 
   return (
-    <div className="search-bar-container">
+    <form className="search-bar-container" onSubmit={handleSearch}>
       <div className="search-bar-grid">
-        <input 
-          type="text" 
-          placeholder="e.g. Mumbai" 
+        <input
+          type="text"
+          placeholder="e.g. Mumbai"
           className="search-input"
           value={destination}
           onChange={(e) => setDestination(e.target.value.toLowerCase())}
@@ -64,7 +66,7 @@ const Header = () => {
             <span>{`${format(dates[0].startDate, 'MM/dd/yyyy')} to ${format(dates[0].endDate, 'MM/dd/yyyy')}`}</span>
           </div>
           {openDate && (
-            <div className="date-range-wrapper header-date-range">
+            <div className="header-date-range">
               <DateRange
                 onChange={(item) => setDates([item.selection])}
                 minDate={new Date()}
@@ -74,10 +76,10 @@ const Header = () => {
             </div>
           )}
         </div>
-        
+
         <div className="guest-dropdown-container" ref={dropdownRef}>
-          <div 
-            className="search-input guest-summary" 
+          <div
+            className="search-input guest-summary"
             onClick={() => setOpenOptions(!openOptions)}
           >
             <span>{`${options.adult} adult · ${options.children} children · ${options.room} room`}</span>
@@ -112,9 +114,9 @@ const Header = () => {
           )}
         </div>
 
-  <button type="button" className="search-button" onClick={handleSearch}>Search</button>
+        <button type="submit" className="search-button" >Search</button>
       </div>
-    </div>
+    </form>
   );
 };
 

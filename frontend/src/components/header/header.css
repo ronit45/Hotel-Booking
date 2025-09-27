@@ -125,9 +125,14 @@
   text-align: center;
 }
 
+/* Ensure the date input is the positioning context */
+.date-input {
+  position: relative;
+}
+
 /* DateRange popup adjustments to match hotels page styling */
 .header-date-range {
-  position: absolute;
+  position: absolute;       /* was 'center' (invalid) */
   top: calc(100% + 8px);
   left: 0;
   z-index: 20;
